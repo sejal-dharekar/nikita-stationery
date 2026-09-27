@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Owner Login | Nikita Stationery</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <div class="card" style="max-width:450px;margin:60px auto;">
+
+        <div style="text-align:center;">
+            <h1>🏪 Nikita Stationery</h1>
+            <p>Owner Dashboard Login</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <p style="color:red;">
+                    Invalid username or password.
+                </p>
+            {% endif %}
+
+            <label>Username</label>
+            <input
+                type="text"
+                name="username"
+                required
+                style="width:100%;padding:12px;margin:8px 0 15px;"
+            >
+
+            <label>Password</label>
+            <input
+                type="password"
+                name="password"
+                required
+                style="width:100%;padding:12px;margin:8px 0 20px;"
+            >
+
+            <button type="submit" style="width:100%;">
+                🔐 Owner Login
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

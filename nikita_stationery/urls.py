@@ -6,9 +6,19 @@ from django.contrib.auth import views as auth_views
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView
 
 
 urlpatterns = [
+    path(
+    "owner/",
+    LoginView.as_view(
+        template_name="accounts/owner_login.html",
+        redirect_authenticated_user=True,
+        next_page="/dashboard/",
+    ),
+    name="owner_login",
+),
     path("admin/", admin.site.urls),
 
     path("register/", register, name="register"),

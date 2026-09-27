@@ -3,23 +3,22 @@ from .models import Product, Category
 
 
 CATEGORY_IMAGES = {
-    "Writing Supplies": "images/categories/writingsupplies.jpg",
-    "Books & Notebooks": "images/categories/books.jpg",
-    "Files & Folders": "images/categories/files.jpg",
-    "Art Supplies": "images/categories/arts.jpg",
-    "School Supplies": "images/categories/school.jpg",
-    "Office Supplies": "images/categories/office.jpg",
+    "Writing Supplies": "images/writingsupplies.jpg",
+    "Books & Notebooks": "images/books.jpg",
+    "Files & Folders": "images/files.jpg",
+    "Art & Craft": "images/arts.jpg",
+    "School Supplies": "images/school.jpg",
+    "Office Supplies": "images/office.jpg",
 }
-
 
 def get_product_image(product):
     if product.image:
         return product.image.url
 
     return CATEGORY_IMAGES.get(
-        product.category.name,
-        "images/categories/office-supplies.png"
-    )
+    product.category.name,
+    "images/office.jpg"
+)
 
 
 def home(request):
