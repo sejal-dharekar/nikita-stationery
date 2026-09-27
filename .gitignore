@@ -10,3 +10,6 @@ media/
 
 .vscode/
 .idea/
+
+
+staticfiles/
