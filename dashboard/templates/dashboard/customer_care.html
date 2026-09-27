@@ -1,0 +1,308 @@
+{% extends "dashboard/owner_base.html" %}
+
+{% block title %}
+Customer Care | Nikita Stationery
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.customer-care-page {
+    width: 100%;
+}
+
+.customer-care-header {
+    margin-bottom: 28px;
+}
+
+.customer-care-header h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    color: #102a56;
+}
+
+.customer-care-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* STATS */
+
+.customer-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.customer-stat {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    padding: 23px;
+    box-shadow: 0 5px 18px rgba(15,42,86,0.05);
+}
+
+.customer-stat-icon {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.customer-stat-label {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.customer-stat-number {
+    color: #102a56;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+
+/* SUPPORT */
+
+.customer-support {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    padding: 28px;
+    box-shadow: 0 5px 18px rgba(15,42,86,0.05);
+}
+
+.customer-support h2 {
+    margin: 0 0 7px;
+    font-size: 22px;
+    color: #102a56;
+}
+
+.customer-support > p {
+    margin: 0 0 25px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.support-card {
+    padding: 22px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+.support-card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.support-card h3 {
+    margin: 0 0 9px;
+    font-size: 17px;
+    color: #102a56;
+}
+
+.support-card p {
+    margin: 0 0 18px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.support-card a {
+    color: #102f63;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.support-card a:hover {
+    text-decoration: underline;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .customer-stats,
+    .support-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+
+<div class="customer-care-page">
+
+
+    <div class="customer-care-header">
+
+        <h1>
+            Customer Care
+        </h1>
+
+        <p>
+            Monitor customer orders and help resolve customer issues.
+        </p>
+
+    </div>
+
+
+
+    <div class="customer-stats">
+
+
+        <div class="customer-stat">
+
+            <div class="customer-stat-icon">
+                📦
+            </div>
+
+            <div class="customer-stat-label">
+                Total Orders
+            </div>
+
+            <div class="customer-stat-number">
+                {{ total_orders }}
+            </div>
+
+        </div>
+
+
+        <div class="customer-stat">
+
+            <div class="customer-stat-icon">
+                ⏳
+            </div>
+
+            <div class="customer-stat-label">
+                Active Orders
+            </div>
+
+            <div class="customer-stat-number">
+                {{ pending_orders }}
+            </div>
+
+        </div>
+
+
+        <div class="customer-stat">
+
+            <div class="customer-stat-icon">
+                ✅
+            </div>
+
+            <div class="customer-stat-label">
+                Delivered
+            </div>
+
+            <div class="customer-stat-number">
+                {{ delivered_orders }}
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="customer-support">
+
+        <h2>
+            Customer Support
+        </h2>
+
+        <p>
+            Quickly access the areas used to handle customer requests.
+        </p>
+
+
+        <div class="support-grid">
+
+
+            <div class="support-card">
+
+                <div class="support-card-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Order Support
+                </h3>
+
+                <p>
+                    View customer orders and update their status.
+                </p>
+
+                <a href="{% url 'manage_orders' %}">
+                    Manage Orders →
+                </a>
+
+            </div>
+
+
+
+            <div class="support-card">
+
+                <div class="support-card-icon">
+                    📚
+                </div>
+
+                <h3>
+                    Product Information
+                </h3>
+
+                <p>
+                    Check product information, prices and availability.
+                </p>
+
+                <a href="{% url 'manage_products' %}">
+                    Manage Products →
+                </a>
+
+            </div>
+
+
+
+            <div class="support-card">
+
+                <div class="support-card-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Inventory Help
+                </h3>
+
+                <p>
+                    Check stock levels and identify low-stock products.
+                </p>
+
+                <a href="{% url 'inventory' %}">
+                    View Inventory →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

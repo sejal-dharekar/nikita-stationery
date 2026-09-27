@@ -1,0 +1,483 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Nikita Stationery | Owner Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/dashboard.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            NIKITA
+        </div>
+
+        <div class="sidebar-subtitle">
+            STATIONERY OWNER
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="{% url 'dashboard' %}"
+                class="active"
+            >
+                📊 Dashboard
+            </a>
+
+            <a href="{% url 'manage_orders' %}">
+                📦 Orders
+            </a>
+
+            <a href="{% url 'manage_products' %}">
+                📚 Products
+            </a>
+
+            <a href="{% url 'manage_categories' %}">
+                🗂️ Categories
+            </a>
+
+            <a href="{% url 'inventory' %}">
+                📋 Inventory
+            </a>
+
+            <a href="{% url 'dashboard_customer_care' %}">
+                💬 Customer Care
+            </a>
+
+            
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+
+        <!-- HEADER -->
+
+        <div class="dashboard-header">
+
+            <div>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Welcome to your Nikita Stationery owner dashboard.
+                </p>
+
+            </div>
+
+
+            <div class="owner-info">
+
+                <strong>
+                    {{ request.user.username }}
+                </strong>
+
+                <span>
+                    Store Owner
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- STATISTICS -->
+
+        <div class="dashboard-stats">
+
+
+            <div class="dashboard-stat">
+
+                <div class="stat-icon">
+                    📦
+                </div>
+
+                <div class="stat-label">
+                    Total Orders
+                </div>
+
+                <div class="stat-value">
+                    {{ total_orders }}
+                </div>
+
+            </div>
+
+
+
+            <div class="dashboard-stat">
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+                <div class="stat-label">
+                    Total Sales
+                </div>
+
+                <div class="stat-value">
+                    ₹{{ total_sales }}
+                </div>
+
+            </div>
+
+
+
+            <div class="dashboard-stat">
+
+                <div class="stat-icon">
+                    ⏳
+                </div>
+
+                <div class="stat-label">
+                    Pending Orders
+                </div>
+
+                <div class="stat-value">
+                    {{ pending_orders }}
+                </div>
+
+            </div>
+
+
+
+            <div class="dashboard-stat">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div class="stat-label">
+                    Delivered
+                </div>
+
+                <div class="stat-value">
+                    {{ delivered_orders }}
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="dashboard-section">
+
+            <div class="section-title">
+
+                <h2>
+                    Quick Actions
+                </h2>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <a
+                    href="{% url 'manage_orders' %}"
+                    class="quick-action"
+                >
+
+                    <span>
+                        📦
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Manage Orders
+                        </strong>
+
+                        <small>
+                            View and update customer orders
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="{% url 'manage_products' %}"
+                    class="quick-action"
+                >
+
+                    <span>
+                        📚
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Manage Products
+                        </strong>
+
+                        <small>
+                            Add and update stationery products
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="{% url 'manage_categories' %}"
+                    class="quick-action"
+                >
+
+                    <span>
+                        🗂️
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Manage Categories
+                        </strong>
+
+                        <small>
+                            Organize your product categories
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="{% url 'inventory' %}"
+                    class="quick-action"
+                >
+
+                    <span>
+                        📋
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Inventory
+                        </strong>
+
+                        <small>
+                            Check stock levels
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RECENT ORDERS + LOW STOCK -->
+
+        <div class="dashboard-two-column">
+
+
+            <!-- RECENT ORDERS -->
+
+            <div class="dashboard-section">
+
+                <div class="section-title">
+
+                    <h2>
+                        Recent Orders
+                    </h2>
+
+                    <a href="{% url 'manage_orders' %}">
+                        View All
+                    </a>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Order
+                                </th>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for order in recent_orders %}
+
+                            <tr>
+
+                                <td>
+                                    #{{ order.id }}
+                                </td>
+
+                                <td>
+                                    {{ order.full_name }}
+                                </td>
+
+                                <td>
+                                    ₹{{ order.total_amount }}
+                                </td>
+
+                                <td>
+
+                                    <span class="status">
+                                        {{ order.get_status_display }}
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+
+                                <td
+                                    colspan="4"
+                                    class="empty"
+                                >
+                                    No orders yet.
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LOW STOCK -->
+
+            <div class="dashboard-section">
+
+                <div class="section-title">
+
+                    <h2>
+                        Low Stock
+                    </h2>
+
+                    <a href="{% url 'inventory' %}">
+                        View Inventory
+                    </a>
+
+                </div>
+
+
+                {% for product in low_stock %}
+
+                <div class="low-stock-item">
+
+                    <div>
+
+                        <strong>
+                            {{ product.name }}
+                        </strong>
+
+                        <small>
+                            {{ product.category.name }}
+                        </small>
+
+                    </div>
+
+
+                    <span>
+                        {{ product.stock }} left
+                    </span>
+
+                </div>
+
+                {% empty %}
+
+                <p class="empty">
+                    No low-stock products.
+                </p>
+
+                {% endfor %}
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | Nikita Stationery</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/customer.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h1>
+            NIKITA STATIONERY
+        </h1>
+
+        <h2>
+            Customer Login
+        </h2>
+
+
+        <form
+            method="POST"
+            action="{% url 'login' %}"
+        >
+
+            {% csrf_token %}
+
+
+            {{ form.as_p }}
+
+
+            {% if form.errors %}
+
+                <p style="color:#dc2626;">
+                    Invalid username or password.
+                    Please try again.
+                </p>
+
+            {% endif %}
+
+
+            <input
+                type="hidden"
+                name="next"
+                value="{{ next }}"
+            >
+
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <p>
+
+            Don't have an account?
+
+            <a href="{% url 'register' %}">
+                Create Account
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

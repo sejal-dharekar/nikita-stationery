@@ -1,0 +1,321 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Cancel Order | Nikita Stationery</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+
+        .cancel-container {
+            max-width: 650px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .cancel-card {
+            background: white;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+        }
+
+        .cancel-card h1 {
+            color: #102a56;
+            margin-bottom: 10px;
+        }
+
+        .order-number {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .warning-box {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            padding: 14px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #102a56;
+            margin-bottom: 8px;
+        }
+
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .cancel-button {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .back-button {
+            background: #e2e8f0;
+            color: #102a56;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .cancel-button:hover {
+            background: #b91c1c;
+        }
+
+        .back-button:hover {
+            background: #cbd5e1;
+        }
+
+        @media (max-width: 600px) {
+
+            .cancel-container {
+                margin: 25px auto;
+            }
+
+            .cancel-card {
+                padding: 20px;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .cancel-button,
+            .back-button {
+                text-align: center;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <h2 style="color:white;">
+        NIKITA STATIONERY
+    </h2>
+
+    <div>
+
+        <a href="/products/">
+            Products
+        </a>
+
+        <a href="/cart/">
+            🛒 Cart
+        </a>
+
+        <a href="/orders/my-orders/">
+            📦 My Orders
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="cancel-container">
+
+    <div class="cancel-card">
+
+        <h1>Cancel Order</h1>
+
+        <p class="order-number">
+            Order #{{ order.id }}
+        </p>
+
+
+        {% if error %}
+
+            <div class="error-message">
+                {{ error }}
+            </div>
+
+        {% endif %}
+
+
+        {% if order.status == "PLACED" or order.status == "ACCEPTED" %}
+
+            <div class="warning-box">
+
+                ⚠️ <strong>Please confirm carefully.</strong>
+
+                <br>
+
+                Cancelling this order will remove it from
+                the active order process.
+
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <div class="form-group">
+
+                    <label for="cancel_reason">
+                        Why do you want to cancel this order?
+                    </label>
+
+                    <select
+                        name="cancel_reason"
+                        id="cancel_reason"
+                        required
+                    >
+
+                        <option value="">
+                            Select a reason
+                        </option>
+
+                        <option value="Ordered by mistake">
+                            Ordered by mistake
+                        </option>
+
+                        <option value="Ordered the wrong product">
+                            Ordered the wrong product
+                        </option>
+
+                        <option value="Need to change quantity">
+                            Need to change quantity
+                        </option>
+
+                        <option value="Found a better option">
+                            Found a better option
+                        </option>
+
+                        <option value="Delivery address needs to be changed">
+                            Delivery address needs to be changed
+                        </option>
+
+                        <option value="Ordered too many items">
+                            Ordered too many items
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="cancel_note">
+                        Additional details
+                        <span style="font-weight:normal;color:#64748b;">
+                            (Optional)
+                        </span>
+                    </label>
+
+                    <textarea
+                        name="cancel_note"
+                        id="cancel_note"
+                        placeholder="Tell us anything else about your cancellation..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="button-row">
+
+                    <button
+                        type="submit"
+                        class="cancel-button"
+                    >
+                        ❌ Confirm Cancellation
+                    </button>
+
+                    <a
+                        href="{% url 'my_orders' %}"
+                        class="back-button"
+                    >
+                        Keep My Order
+                    </a>
+
+                </div>
+
+            </form>
+
+
+        {% else %}
+
+            <div class="warning-box">
+
+                This order can no longer be cancelled.
+
+                <br><br>
+
+                Current status:
+                <strong>{{ order.status }}</strong>
+
+            </div>
+
+
+            <a
+                href="{% url 'my_orders' %}"
+                class="back-button"
+            >
+                ← Back to My Orders
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

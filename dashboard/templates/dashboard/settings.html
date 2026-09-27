@@ -1,0 +1,186 @@
+{% extends "dashboard/owner_base.html" %}
+
+{% block title %}
+Settings | Nikita Stationery
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="owner-header">
+
+    <h1>
+        Settings
+    </h1>
+
+    <p>
+        Manage your Nikita Stationery store settings.
+    </p>
+
+</div>
+
+
+
+<div class="settings-grid">
+
+
+    <!-- STORE -->
+
+    <div class="settings-card">
+
+        <h3>
+            Store Information
+        </h3>
+
+
+        <div class="settings-row">
+
+            <span class="settings-label">
+                Store Name
+            </span>
+
+            <span class="settings-value">
+                Nikita Stationery
+            </span>
+
+        </div>
+
+
+        <div class="settings-row">
+
+            <span class="settings-label">
+                Payment Method
+            </span>
+
+            <span class="settings-value">
+                Cash on Delivery
+            </span>
+
+        </div>
+
+
+        <div class="settings-row">
+
+            <span class="settings-label">
+                Order System
+            </span>
+
+            <span class="settings-value">
+                Online Orders
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ADMIN -->
+
+    <div class="settings-card">
+
+        <h3>
+            Admin Account
+        </h3>
+
+
+        <div class="settings-row">
+
+            <span class="settings-label">
+                Username
+            </span>
+
+            <span class="settings-value">
+                {{ request.user.username }}
+            </span>
+
+        </div>
+
+
+        <div class="settings-row">
+
+            <span class="settings-label">
+                Account Type
+            </span>
+
+            <span class="settings-value">
+                Store Owner
+            </span>
+
+        </div>
+
+
+        <div class="settings-row">
+
+            <span class="settings-label">
+                Access
+            </span>
+
+            <span class="settings-value">
+                Admin Dashboard
+            </span>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="owner-section">
+
+    <h2>
+        Store Configuration
+    </h2>
+
+    <p class="owner-section-description">
+        These settings represent the current configuration
+        of your Nikita Stationery store.
+    </p>
+
+
+    <div class="settings-row">
+
+        <span class="settings-label">
+            Payment
+        </span>
+
+        <span class="settings-value">
+            COD
+        </span>
+
+    </div>
+
+
+    <div class="settings-row">
+
+        <span class="settings-label">
+            Order Status System
+        </span>
+
+        <span class="settings-value">
+            Enabled
+        </span>
+
+    </div>
+
+
+    <div class="settings-row">
+
+        <span class="settings-label">
+            Inventory Tracking
+        </span>
+
+        <span class="settings-value">
+            Enabled
+        </span>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

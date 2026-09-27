@@ -1,0 +1,200 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders | Nikita Stationery</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <h2 style="color:white;">NIKITA STATIONERY</h2>
+    <div>
+        <a href="/products/">Products</a>
+        <a href="/cart/">🛒 Cart</a>
+        <a href="/orders/my-orders/">📦 My Orders</a>
+    </div>
+</nav>
+
+<div class="page-container">
+
+    <br>
+
+    <h1>📦 My Orders</h1>
+    <p style="color:#64748b;">View and track all your orders.</p>
+
+    {% if orders %}
+
+        <div style="margin-top:25px;">
+
+        {% for order in orders %}
+
+            <div class="card order-card">
+
+                <div class="order-top">
+                    <div>
+                        <p>Order Number</p>
+                        <h2>#{{ order.id }}</h2>
+                    </div>
+
+                    <div class="status-badge">
+                        {{ order.status }}
+                    </div>
+                </div>
+
+                <hr>
+
+                <hr>
+
+<!-- ORDER PRODUCTS -->
+
+<div style="margin:15px 0;">
+
+    <strong style="color:#102a56;">
+        Products
+    </strong>
+
+    {% for item in order.items.all %}
+
+        <div style="
+            margin-top:10px;
+            padding:10px 12px;
+            background:#f8fafc;
+            border-radius:8px;
+            color:#334155;
+        ">
+
+            🛍️ {{ item.product.name }}
+
+            <span style="color:#64748b;">
+                × {{ item.quantity }}
+            </span>
+
+        </div>
+
+    {% empty %}
+
+        <p style="color:#64748b;">
+            No products found.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+<div class="order-details">
+
+                <br>
+
+                <a href="{% url 'order_tracking' order.id %}">
+                    <button type="button">
+                        📦 Track Order
+                    </button>
+                </a>
+                {% if order.status == "PLACED" or order.status == "ACCEPTED" %}
+
+    <a href="{% url 'cancel_order' order.id %}">
+        <button
+            type="button"
+            style="background:#dc2626; margin-left:8px;"
+        >
+            ❌ Cancel Order
+        </button>
+    </a>
+
+{% endif %}
+
+            </div>
+
+        {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="card empty-cart">
+
+            <div style="font-size:60px;">📦</div>
+
+            <h2>No orders yet</h2>
+
+            <p>Your placed orders will appear here.</p>
+
+            <br>
+
+            <a href="/products/">
+                <button type="button">
+                    Browse Products
+                </button>
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+<style>
+
+.order-card {
+    margin-bottom:20px;
+}
+
+.order-top {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.order-top p {
+    color:#64748b;
+    margin-bottom:3px;
+}
+
+.status-badge {
+    background:#eff6ff;
+    color:#173b7a;
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.order-details {
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+}
+
+.order-details span {
+    display:block;
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.order-details strong {
+    color:#102a56;
+}
+
+@media(max-width:600px) {
+
+    .order-top {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .order-details {
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+}
+
+</style>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        Nikita Stationery
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/owner-pages.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="owner-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="owner-sidebar">
+
+        <div class="owner-logo">
+            NIKITA
+        </div>
+
+
+        <nav class="owner-nav">
+
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'manage_orders' %}">
+                Orders
+            </a>
+
+            <a href="{% url 'manage_products' %}">
+                Products
+            </a>
+
+            <a href="{% url 'manage_categories' %}">
+                Categories
+            </a>
+
+            <a href="{% url 'inventory' %}">
+                Inventory
+            </a>
+
+            <a href="{% url 'dashboard_customer_care' %}">
+                Customer Care
+            </a>
+
+            <a href="{% url 'dashboard_settings' %}">
+                Settings
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="owner-main">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+</div>
+
+
+</body>
+
+</html>

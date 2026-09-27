@@ -1,0 +1,163 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Manage Categories | Nikita Stationery</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            background: #e8eef8;
+            color: #173b7a;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .category-table {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .category-name {
+            font-weight: bold;
+            color: #173b7a;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <h2 style="color:white;">
+        NIKITA STATIONERY
+    </h2>
+
+    <div>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'manage_orders' %}">Orders</a>
+        <a href="{% url 'manage_products' %}">Products</a>
+    </div>
+
+</nav>
+
+
+<div class="page-container">
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>🗂 Manage Categories</h1>
+
+            <p style="color:#64748b;">
+                Manage stationery product categories
+            </p>
+
+        </div>
+
+        <a href="{% url 'dashboard' %}" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="card category-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Products</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for category in categories %}
+
+                <tr>
+
+                    <td>
+
+                        <span class="category-name">
+                            {{ category.name }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        {% if category.description %}
+
+                            {{ category.description }}
+
+                        {% else %}
+
+                            <span style="color:#94a3b8;">
+                                No description
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ category.products.count }}
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="3">
+
+                        <div style="padding:40px;text-align:center;">
+
+                            <h2>No categories yet</h2>
+
+                            <p style="color:#64748b;">
+                                Categories will appear here.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>

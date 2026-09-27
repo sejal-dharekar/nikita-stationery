@@ -1,0 +1,189 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }} | Nikita Stationery</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <h2 style="color:white;">NIKITA STATIONERY</h2>
+
+    <div>
+        <a href="/products/">Products</a>
+        <a href="/cart/">🛒 Cart</a>
+        <a href="/orders/my-orders/">📦 My Orders</a>
+    </div>
+</nav>
+
+<div class="page-container">
+
+    <br>
+
+    <a href="/products/">← Back to Products</a>
+
+    <div class="card">
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;">
+
+            <!-- Product Image -->
+            <div style="text-align:center;">
+
+                {% if product.image %}
+
+                    <img
+                        src="{{ product.image.url }}"
+                        alt="{{ product.name }}"
+                        style="max-width:100%; height:350px; object-fit:contain;"
+                    >
+
+                {% else %}
+
+                    <div style="
+                        height:350px;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        background:#f1f5f9;
+                        border-radius:10px;
+                        font-size:70px;
+                    ">
+                        📚
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Product Information -->
+            <div>
+
+                <p style="color:#64748b;">
+                    {{ product.category.name }}
+                </p>
+
+                <h1>{{ product.name }}</h1>
+
+                <br>
+
+                <p>
+                    {{ product.description }}
+                </p>
+
+                <br>
+
+                <h2 class="price">
+                    ₹{{ product.price }}
+                </h2>
+
+                <p>
+                    {% if product.stock > 0 %}
+                        <strong style="color:green;">
+                            ✓ In Stock
+                        </strong>
+                    {% else %}
+                        <strong style="color:red;">
+                            Out of Stock
+                        </strong>
+                    {% endif %}
+                </p>
+
+                <br>
+
+                {% if product.stock > 0 %}
+
+                    <a href="{% url 'add_to_cart' product.id %}">
+                        <button>
+                            🛒 Add to Cart
+                        </button>
+                    </a>
+
+                {% else %}
+
+                    <button disabled>
+                        Out of Stock
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Related Products -->
+
+    <br>
+
+    <h2>📚 You May Also Like</h2>
+
+    <div class="product-grid">
+
+        {% if related_products %}
+
+            {% for related in related_products %}
+
+                <div class="product-card">
+
+                    {% if related.image %}
+
+                        <img
+                            src="{{ related.image.url }}"
+                            alt="{{ related.name }}"
+                            style="width:100%; height:160px; object-fit:contain;"
+                        >
+
+                    {% else %}
+
+                        <div style="
+                            height:160px;
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            background:#f1f5f9;
+                            border-radius:8px;
+                            font-size:45px;
+                        ">
+                            📚
+                        </div>
+
+                    {% endif %}
+
+                    <br>
+
+                    <h3>{{ related.name }}</h3>
+
+                    <p class="price">
+                        ₹{{ related.price }}
+                    </p>
+
+                    <br>
+
+                    <a href="{% url 'product_detail' related.id %}">
+                        <button>
+                            View Product
+                        </button>
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>No related products available.</p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

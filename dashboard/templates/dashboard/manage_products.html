@@ -1,0 +1,334 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Manage Products | Nikita Stationery</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .secondary-btn {
+            background: #e8eef8;
+            color: #173b7a;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .products-table {
+            overflow-x: auto;
+        }
+
+        .products-table table {
+            min-width: 950px;
+        }
+
+        .product-name {
+            font-weight: bold;
+            color: #173b7a;
+        }
+
+        .stock-good {
+            font-weight: bold;
+        }
+
+        .stock-low {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .active {
+            color: #15803d;
+            font-weight: bold;
+        }
+
+        .inactive {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .edit-btn {
+            background: #173b7a;
+            color: white;
+            padding: 7px 12px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        @media(max-width: 700px) {
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                flex-wrap: wrap;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<nav class="navbar">
+
+    <h2 style="color:white;">
+        NIKITA STATIONERY
+    </h2>
+
+    <div>
+
+        <a href="{% url 'dashboard' %}">
+            Dashboard
+        </a>
+
+        <a href="{% url 'manage_orders' %}">
+            Orders
+        </a>
+
+        <a href="{% url 'manage_categories' %}">
+            Categories
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<div class="page-container">
+
+
+    <div class="page-header">
+
+        <div>
+
+            <h1>📚 Manage Products</h1>
+
+            <p style="color:#64748b;">
+                Add and manage stationery products
+            </p>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <a
+                href="{% url 'add_product' %}"
+                class="secondary-btn"
+            >
+                ➕ Add Product
+            </a>
+
+            <a
+                href="{% url 'dashboard' %}"
+                class="secondary-btn"
+            >
+                ← Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="card products-table">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Product</th>
+
+                    <th>Category</th>
+
+                    <th>Price</th>
+
+                    <th>Stock</th>
+
+                    <th>Status</th>
+
+                    <th>Added</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+                {% for product in products %}
+
+
+                <tr>
+
+
+                    <td>
+
+                        <span class="product-name">
+                            {{ product.name }}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        {{ product.category.name }}
+
+                    </td>
+
+
+                    <td>
+
+                        ₹{{ product.price }}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if product.stock <= 10 %}
+
+                            <span class="stock-low">
+
+                                {{ product.stock }} — Low
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="stock-good">
+
+                                {{ product.stock }}
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if product.is_active %}
+
+                            <span class="active">
+                                Active
+                            </span>
+
+                        {% else %}
+
+                            <span class="inactive">
+                                Inactive
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        {{ product.created_at|date:"d M Y" }}
+
+                    </td>
+
+
+                    <td>
+
+                        <a
+                            href="{% url 'edit_product' product.id %}"
+                            class="edit-btn"
+                        >
+                            ✏ Edit
+                        </a>
+
+                    </td>
+
+
+                </tr>
+
+
+                {% empty %}
+
+
+                <tr>
+
+                    <td colspan="7">
+
+                        <div
+                            style="
+                                padding:50px;
+                                text-align:center;
+                            "
+                        >
+
+                            <h2>
+                                No products yet
+                            </h2>
+
+                            <p style="color:#64748b;">
+                                Click "Add Product" to create your first product.
+                            </p>
+
+                            <br>
+
+                            <a
+                                href="{% url 'add_product' %}"
+                                class="edit-btn"
+                            >
+                                ➕ Add Product
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                {% endfor %}
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

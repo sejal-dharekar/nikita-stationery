@@ -1,0 +1,311 @@
+{% extends "dashboard/owner_base.html" %}
+
+{% block title %}
+Add Product | Nikita Stationery
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.product-form-page {
+    max-width: 850px;
+}
+
+.product-form-header {
+    margin-bottom: 25px;
+}
+
+.product-form-header h1 {
+    margin: 0 0 8px;
+    color: #102a56;
+    font-size: 30px;
+}
+
+.product-form-header p {
+    margin: 0;
+    color: #64748b;
+}
+
+.product-form-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(15,42,86,0.06);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #102a56;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #102f63;
+}
+
+.image-upload {
+    padding: 20px;
+    background: #f8fafc;
+    border: 1px dashed #94a3b8;
+    border-radius: 10px;
+}
+
+.image-upload input {
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+.image-help {
+    margin-top: 8px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.save-button {
+    border: none;
+    background: #102f63;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background: #1d4785;
+}
+
+.cancel-button {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 9px;
+    background: #f1f5f9;
+    color: #102a56;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+
+    .product-form-card {
+        padding: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+}
+
+</style>
+
+
+<div class="product-form-page">
+
+    <div class="product-form-header">
+
+        <h1>
+            Add Product
+        </h1>
+
+        <p>
+            Add a new stationery product to your store.
+        </p>
+
+    </div>
+
+
+    <div class="product-form-card">
+
+        <!-- IMPORTANT: enctype allows image upload -->
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label>
+                    Product Name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Example: A4 Notebook"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Category
+                </label>
+
+                <select
+                    name="category"
+                    required
+                >
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    {% for category in categories %}
+
+                    <option value="{{ category.id }}">
+                        {{ category.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    name="description"
+                    placeholder="Enter product description"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Price (₹)
+                </label>
+
+                <input
+                    type="number"
+                    name="price"
+                    step="0.01"
+                    min="0"
+                    placeholder="Example: 120"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Stock Quantity
+                </label>
+
+                <input
+                    type="number"
+                    name="stock"
+                    min="0"
+                    placeholder="Example: 100"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PRODUCT PHOTO -->
+
+            <div class="form-group">
+
+                <label>
+                    Product Photo
+                </label>
+
+                <div class="image-upload">
+
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                    >
+
+                    <div class="image-help">
+                        Upload JPG, JPEG, PNG or another image format.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+                    Add Product
+                </button>
+
+                <a
+                    href="{% url 'manage_products' %}"
+                    class="cancel-button"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

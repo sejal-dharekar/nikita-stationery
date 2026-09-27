@@ -1,0 +1,317 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Track Order | Nikita Stationery</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <h2 style="color:white;">NIKITA STATIONERY</h2>
+    <div>
+        <a href="/products/">Products</a>
+        <a href="/cart/">🛒 Cart</a>
+        <a href="/orders/my-orders/">📦 My Orders</a>
+    </div>
+</nav>
+
+<div class="page-container">
+
+    <br>
+
+    <a href="{% url 'my_orders' %}">
+        ← Back to My Orders
+    </a>
+
+    <div class="card tracking-card">
+
+        <div class="tracking-header">
+
+            <div>
+                <p>Order Number</p>
+                <h1>#{{ order.id }}</h1>
+            </div>
+
+            <div>
+                <p>Total Amount</p>
+                <h2 class="price">₹{{ order.total_amount }}</h2>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h2>📦 Order Tracking</h2>
+
+        <p style="color:#64748b;">
+            Current Status:
+            <strong>{{ order.status }}</strong>
+        </p>
+
+        <div class="timeline">
+
+            <!-- PLACED -->
+
+            <div class="timeline-item completed">
+                <div class="timeline-dot">✓</div>
+
+                <div>
+                    <h3>Order Placed</h3>
+                    <p>Your order has been received.</p>
+                </div>
+            </div>
+
+
+            <!-- ACCEPTED -->
+
+            <div class="timeline-item
+            {% if order.status == 'ACCEPTED' or order.status == 'PROCESSING' or order.status == 'PACKED' or order.status == 'SHIPPED' or order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+            completed
+            {% endif %}">
+
+                <div class="timeline-dot">
+                    {% if order.status == 'ACCEPTED' or order.status == 'PROCESSING' or order.status == 'PACKED' or order.status == 'SHIPPED' or order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+                    ✓
+                    {% else %}
+                    2
+                    {% endif %}
+                </div>
+
+                <div>
+                    <h3>Order Accepted</h3>
+                    <p>Your order has been accepted.</p>
+                </div>
+
+            </div>
+
+
+            <!-- PROCESSING -->
+
+            <div class="timeline-item
+            {% if order.status == 'PROCESSING' or order.status == 'PACKED' or order.status == 'SHIPPED' or order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+            completed
+            {% endif %}">
+
+                <div class="timeline-dot">
+                    {% if order.status == 'PROCESSING' or order.status == 'PACKED' or order.status == 'SHIPPED' or order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+                    ✓
+                    {% else %}
+                    3
+                    {% endif %}
+                </div>
+
+                <div>
+                    <h3>Processing</h3>
+                    <p>Your order is being prepared.</p>
+                </div>
+
+            </div>
+
+
+            <!-- PACKED -->
+
+            <div class="timeline-item
+            {% if order.status == 'PACKED' or order.status == 'SHIPPED' or order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+            completed
+            {% endif %}">
+
+                <div class="timeline-dot">
+                    {% if order.status == 'PACKED' or order.status == 'SHIPPED' or order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+                    ✓
+                    {% else %}
+                    4
+                    {% endif %}
+                </div>
+
+                <div>
+                    <h3>Packed</h3>
+                    <p>Your package has been packed.</p>
+                </div>
+
+            </div>
+
+
+            <!-- SHIPPED -->
+
+            <div class="timeline-item
+            {% if order.status == 'SHIPPED' or order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+            completed
+            {% endif %}">
+
+                <div class="timeline-dot">
+                    {% if order.status == 'SHIPPED' or order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+                    ✓
+                    {% else %}
+                    5
+                    {% endif %}
+                </div>
+
+                <div>
+                    <h3>Shipped</h3>
+                    <p>Your package has been shipped.</p>
+                </div>
+
+            </div>
+
+
+            <!-- OUT FOR DELIVERY -->
+
+            <div class="timeline-item
+            {% if order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+            completed
+            {% endif %}">
+
+                <div class="timeline-dot">
+                    {% if order.status == 'OUT_FOR_DELIVERY' or order.status == 'DELIVERED' %}
+                    ✓
+                    {% else %}
+                    6
+                    {% endif %}
+                </div>
+
+                <div>
+                    <h3>Out for Delivery</h3>
+                    <p>Your package is on the way to you.</p>
+                </div>
+
+            </div>
+
+
+            <!-- DELIVERED -->
+
+            <div class="timeline-item
+            {% if order.status == 'DELIVERED' %}
+            completed
+            {% endif %}">
+
+                <div class="timeline-dot">
+                    {% if order.status == 'DELIVERED' %}
+                    ✓
+                    {% else %}
+                    7
+                    {% endif %}
+                </div>
+
+                <div>
+                    <h3>Delivered</h3>
+                    <p>Your order has been delivered.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div style="text-align:center;">
+
+            <a href="/products/">
+                <button type="button">
+                    Continue Shopping
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+
+.tracking-card {
+    max-width:850px;
+    margin:30px auto;
+}
+
+.tracking-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.tracking-header p {
+    color:#64748b;
+}
+
+.timeline {
+    margin:35px 0;
+    position:relative;
+}
+
+.timeline-item {
+    display:flex;
+    gap:20px;
+    position:relative;
+    padding-bottom:35px;
+    color:#94a3b8;
+}
+
+.timeline-item:not(:last-child)::after {
+    content:"";
+    position:absolute;
+    left:17px;
+    top:35px;
+    width:2px;
+    height:calc(100% - 10px);
+    background:#cbd5e1;
+}
+
+.timeline-dot {
+    width:36px;
+    height:36px;
+    min-width:36px;
+    border-radius:50%;
+    background:#e2e8f0;
+    color:#64748b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    z-index:1;
+}
+
+.timeline-item.completed {
+    color:#102a56;
+}
+
+.timeline-item.completed .timeline-dot {
+    background:#102a56;
+    color:white;
+}
+
+.timeline-item.completed:not(:last-child)::after {
+    background:#102a56;
+}
+
+.timeline-item h3 {
+    margin-bottom:4px;
+}
+
+.timeline-item p {
+    margin:0;
+    color:#64748b;
+}
+
+@media(max-width:600px) {
+
+    .tracking-header {
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .timeline {
+        margin-top:25px;
+    }
+
+}
+
+</style>
+
+</body>
+</html>

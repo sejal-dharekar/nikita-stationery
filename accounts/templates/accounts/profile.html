@@ -1,0 +1,235 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Profile | Nikita Stationery</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/customer.css' %}"
+    >
+
+</head>
+
+<body>
+
+<div style="
+    min-height:100vh;
+    background:#f5f7fb;
+    padding:50px 20px;
+">
+
+    <div style="
+        max-width:700px;
+        margin:auto;
+        background:white;
+        padding:40px;
+        border-radius:16px;
+        box-shadow:0 10px 30px rgba(0,0,0,.08);
+    ">
+
+        <h1 style="color:#102a56;">
+            👤 My Profile
+        </h1>
+
+        <p style="color:#64748b;">
+            Manage your Nikita Stationery account details.
+        </p>
+
+        <hr>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <!-- NAME -->
+
+            <label>
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                name="full_name"
+                value="{{ user.get_full_name }}"
+                required
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin:8px 0 18px;
+                    border:1px solid #dbe2ea;
+                    border-radius:8px;
+                    box-sizing:border-box;
+                "
+            >
+
+            <!-- EMAIL -->
+
+            <label>
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                value="{{ user.email }}"
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin:8px 0 18px;
+                    border:1px solid #dbe2ea;
+                    border-radius:8px;
+                    box-sizing:border-box;
+                "
+            >
+
+            <!-- PHONE -->
+
+            <label>
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                name="phone"
+                value="{{ profile.phone }}"
+                placeholder="Enter phone number"
+                required
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin:8px 0 18px;
+                    border:1px solid #dbe2ea;
+                    border-radius:8px;
+                    box-sizing:border-box;
+                "
+            >
+
+            <!-- ADDRESS -->
+
+            <label>
+                Address
+            </label>
+
+            <textarea
+                name="address"
+                rows="4"
+                placeholder="Enter your complete address"
+                required
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin:8px 0 18px;
+                    border:1px solid #dbe2ea;
+                    border-radius:8px;
+                    box-sizing:border-box;
+                    resize:vertical;
+                "
+            >{{ profile.address }}</textarea>
+
+            <!-- CITY -->
+
+            <label>
+                City
+            </label>
+
+            <input
+                type="text"
+                name="city"
+                value="{{ profile.city }}"
+                placeholder="Enter city"
+                required
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin:8px 0 18px;
+                    border:1px solid #dbe2ea;
+                    border-radius:8px;
+                    box-sizing:border-box;
+                "
+            >
+
+            <!-- PINCODE -->
+
+            <label>
+                Pincode
+            </label>
+
+            <input
+                type="text"
+                name="pincode"
+                value="{{ profile.pincode }}"
+                placeholder="Enter pincode"
+                required
+                style="
+                    width:100%;
+                    padding:12px;
+                    margin:8px 0 25px;
+                    border:1px solid #dbe2ea;
+                    border-radius:8px;
+                    box-sizing:border-box;
+                "
+            >
+
+            <button
+                type="submit"
+                style="
+                    width:100%;
+                    padding:13px;
+                    background:#102a56;
+                    color:white;
+                    border:none;
+                    border-radius:8px;
+                    font-size:16px;
+                    font-weight:600;
+                    cursor:pointer;
+                "
+            >
+                Save Profile
+            </button>
+
+        </form>
+
+        <div style="margin-top:20px;">
+
+            <a
+                href="{% url 'my_orders' %}"
+                style="
+                    color:#102a56;
+                    text-decoration:none;
+                    font-weight:600;
+                "
+            >
+                📦 My Orders
+            </a>
+
+            &nbsp;&nbsp;
+
+            <a
+                href="{% url 'home' %}"
+                style="
+                    color:#102a56;
+                    text-decoration:none;
+                    font-weight:600;
+                "
+            >
+                ← Home
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

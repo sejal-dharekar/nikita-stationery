@@ -1,0 +1,410 @@
+/* =====================================================
+   NIKITA STATIONERY - DJANGO ADMIN CUSTOM CSS
+   ===================================================== */
+
+:root {
+    --primary: #102a56;
+    --primary-light: #173b7a;
+    --border: #dbe3ef;
+    --background: #f5f7fb;
+    --white: #ffffff;
+    --text: #172554;
+}
+
+
+/* =========================
+   BODY
+   ========================= */
+
+body {
+    background: var(--background) !important;
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   TOP HEADER
+   ========================= */
+
+#header {
+    background: var(--primary) !important;
+    color: white !important;
+    padding: 15px 30px !important;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+}
+
+
+#branding h1,
+#branding h1 a {
+    color: white !important;
+    font-size: 26px !important;
+    font-weight: 700 !important;
+}
+
+
+#branding h1 a::after {
+    content: "  •  Admin Panel";
+    font-size: 14px;
+    font-weight: normal;
+    opacity: 0.75;
+}
+
+
+#user-tools {
+    color: white !important;
+    font-size: 14px;
+}
+
+
+#user-tools a {
+    color: white !important;
+}
+
+
+#user-tools a:hover {
+    color: #dbeafe !important;
+}
+
+
+/* =========================
+   MAIN CONTENT
+   ========================= */
+
+#content {
+    padding: 30px !important;
+}
+
+
+#content-main {
+    width: 100%;
+}
+
+
+/* =========================
+   PAGE TITLE
+   ========================= */
+
+#content h1 {
+    color: var(--primary) !important;
+    font-size: 30px !important;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   MODULE / SECTIONS
+   ========================= */
+
+.module {
+    background: var(--white) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+    margin-bottom: 25px !important;
+}
+
+
+.module h2,
+.module caption {
+    background: var(--primary) !important;
+    color: white !important;
+    font-size: 16px !important;
+    font-weight: 600;
+    padding: 15px 18px !important;
+}
+
+
+/* =========================
+   TABLE ROWS
+   ========================= */
+
+.module table {
+    width: 100%;
+}
+
+
+.module tr {
+    border-bottom: 1px solid var(--border);
+}
+
+
+.module tr:last-child {
+    border-bottom: none;
+}
+
+
+.module tr:hover {
+    background: #f8fafc;
+}
+
+
+.module td,
+.module th {
+    padding: 14px 16px !important;
+}
+
+
+/* =========================
+   LINKS
+   ========================= */
+
+a {
+    color: var(--primary-light);
+}
+
+
+a:hover {
+    color: #0f2d5c;
+}
+
+
+/* =========================
+   ADD / CHANGE LINKS
+   ========================= */
+
+.addlink,
+.changelink {
+    font-weight: 600 !important;
+}
+
+
+.addlink {
+    color: #16803c !important;
+}
+
+
+.changelink {
+    color: var(--primary-light) !important;
+}
+
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+button {
+    background: var(--primary) !important;
+    border: none !important;
+    border-radius: 7px !important;
+    color: white !important;
+    padding: 10px 18px !important;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover,
+button:hover {
+    background: var(--primary-light) !important;
+}
+
+
+/* =========================
+   GREEN ADD BUTTON
+   ========================= */
+
+.addlink:hover {
+    color: #0f6b30 !important;
+}
+
+
+/* =========================
+   RECENT ACTIONS
+   ========================= */
+
+#content-related {
+    background: var(--white) !important;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+    padding: 0 !important;
+}
+
+
+#content-related h2 {
+    background: var(--primary) !important;
+    color: white !important;
+    padding: 15px 18px !important;
+    margin: 0 !important;
+}
+
+
+#content-related .module {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* =========================
+   BREADCRUMBS
+   ========================= */
+
+div.breadcrumbs {
+    background: white !important;
+    color: var(--primary) !important;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 30px !important;
+}
+
+
+div.breadcrumbs a {
+    color: var(--primary-light) !important;
+}
+
+
+/* =========================
+   FORM INPUTS
+   ========================= */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="url"],
+textarea,
+select {
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 7px !important;
+    padding: 10px !important;
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-light) !important;
+    outline: none !important;
+}
+
+
+/* =========================
+   OBJECT TOOLS
+   ========================= */
+
+.object-tools a {
+    background: var(--primary) !important;
+    border-radius: 7px !important;
+    padding: 10px 15px !important;
+}
+
+
+.object-tools a:hover {
+    background: var(--primary-light) !important;
+}
+
+
+/* =========================
+   CHANGE LIST
+   ========================= */
+
+#changelist {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+}
+
+
+#changelist table {
+    width: 100%;
+}
+
+
+#changelist table thead th {
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+
+#changelist table tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+/* =========================
+   FILTER SIDEBAR
+   ========================= */
+
+#changelist-filter {
+    background: white !important;
+    border-left: 1px solid var(--border);
+}
+
+
+#changelist-filter h2 {
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+
+/* =========================
+   MESSAGES
+   ========================= */
+
+.messagelist li {
+    border-radius: 8px !important;
+    margin-bottom: 10px !important;
+}
+
+
+/* =========================
+   DELETE BUTTON
+   ========================= */
+
+.deletelink {
+    border-radius: 7px !important;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+#footer {
+    background: var(--primary) !important;
+    color: white !important;
+    padding: 20px !important;
+    margin-top: 30px;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 800px) {
+
+    #header {
+        padding: 12px 18px !important;
+    }
+
+    #content {
+        padding: 18px !important;
+    }
+
+    #branding h1,
+    #branding h1 a {
+        font-size: 21px !important;
+    }
+
+    #user-tools {
+        font-size: 12px;
+    }
+
+    .module {
+        overflow-x: auto;
+    }
+}
